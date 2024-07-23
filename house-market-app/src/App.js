@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./pages/HomePage/HomePage";
 import AdPage from "./pages/AdPage/AdPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -18,6 +19,7 @@ const App = () => {
   return (
     <Router>
       <Toaster />
+      <Navbar />
       <div className={`container ${theme}`}>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
