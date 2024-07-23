@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./pages/HomePage/HomePage";
 import AdPage from "./pages/AdPage/AdPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Navbar from "./components/Navbar/Navbar";
 import { useTheme } from "./contexts/ThemeContext";
 import AddAdPage from "./pages/AddAdPage/AddAdPage";
 import { Toaster } from "react-hot-toast";
@@ -26,7 +27,9 @@ const App = () => {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/add-ad" element={<AddAdPage />} />
           <Route path="/" element={<HomePage />} />
-          <Route path="/ad/:id" element={<AdPage />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/ad/:id" element={<AdPage />} />
+          </Route>
         </Routes>
       </div>
     </Router>
