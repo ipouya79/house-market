@@ -1,4 +1,10 @@
 {
-    "users": [],
-    "ads": []
-  }
+  "users": [
+    {
+      "email": "admin@gmail.com",
+      "password": "$2a$10$sGpShRG3ZpxoYbzVSo.Nf.UMOR63Yu484rFnFmqZIELSwGFl7iaXa",
+      "id": 1
+    }
+  ],
+  "ads": []
+}
