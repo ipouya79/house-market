@@ -26,7 +26,7 @@ const LoginPage = () => {
           ورود به حساب کاربری
         </h1>
         {error && (
-          <p className="text-red-500 dark:text-red-400 mb-4">{error}</p>
+          <p className="text-right text-red-500 dark:text-red-400 mb-4">{error}</p>
         )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
