@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
       localStorage.setItem("user", JSON.stringify(userData));
       setUser(userData);
     } catch (error) {
-      throw new Error("Invalid credentials");
+      throw new Error("اطلاعات وارد شده نادرست است");
     }
   };
 
@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
       localStorage.setItem("user", JSON.stringify(userData));
       setUser(userData);
     } catch (error) {
-      throw new Error("Registration failed");
+      throw new Error("ثبت‌نام ناموفق بود");
     }
   };
 
