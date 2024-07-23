@@ -8,6 +8,7 @@ const AdForm = ({ ad, onSave }) => {
   const [description, setDescription] = useState("");
   const [phone, setPhone] = useState("");
   const [location, setLocation] = useState({ lat: 35.6892, lng: 51.389 });
+  const [coordinates, setCoordinates] = useState("");
 
   useEffect(() => {
     if (ad) {
@@ -15,7 +16,10 @@ const AdForm = ({ ad, onSave }) => {
       setAddress(ad.address || "");
       setDescription(ad.description || "");
       setPhone(ad.phone || "");
-      setLocation({ lat: ad.lat || 35.6892, lng: ad.lng || 51.389 });
+      const lat = ad.lat || 35.6892;
+      const lng = ad.lng || 51.389;
+      setLocation({ lat, lng });
+      setCoordinates(`${lat.toFixed(3)}, ${lng.toFixed(3)}`);
     }
   }, [ad]);
 
@@ -33,6 +37,18 @@ const AdForm = ({ ad, onSave }) => {
     };
 
     onSave(adData);
+  };
+
+  const handleCoordinatesChange = (e) => {
+    const value = e.target.value;
+    setCoordinates(value);
+    const [lat, lng] = value.split(",").map(Number);
+    if (!isNaN(lat) && !isNaN(lng)) {
+      setLocation({
+        lat: parseFloat(lat.toFixed(3)),
+        lng: parseFloat(lng.toFixed(3)),
+      });
+    }
   };
 
   return (
@@ -53,9 +69,9 @@ const AdForm = ({ ad, onSave }) => {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
-            className="h-24  w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className="h-20 w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
           />
-          <textarea
+          <input
             placeholder="توضیحات تکمیلی"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -70,6 +86,15 @@ const AdForm = ({ ad, onSave }) => {
             required
             className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+          <input
+            disabled
+            type="text"
+            placeholder="مختصات (عرض جغرافیایی, طول جغرافیایی)"
+            value={coordinates}
+            onChange={handleCoordinatesChange}
+            required
+            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
           <button
             type="submit"
             className="w-full py-3 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -81,8 +106,16 @@ const AdForm = ({ ad, onSave }) => {
       <div className="w-full lg:w-1/2">
         <MapPicker
           location={location}
-          setLat={(lat) => setLocation((prev) => ({ ...prev, lat }))}
-          setLng={(lng) => setLocation((prev) => ({ ...prev, lng }))}
+          setLat={(lat) => {
+            const roundedLat = parseFloat(lat.toFixed(3));
+            setLocation((prev) => ({ ...prev, lat: roundedLat }));
+            setCoordinates(`${roundedLat}, ${location.lng.toFixed(3)}`);
+          }}
+          setLng={(lng) => {
+            const roundedLng = parseFloat(lng.toFixed(3));
+            setLocation((prev) => ({ ...prev, lng: roundedLng }));
+            setCoordinates(`${location.lat.toFixed(3)}, ${roundedLng}`);
+          }}
           setAddress={(address) => setAddress(address)}
         />
       </div>
