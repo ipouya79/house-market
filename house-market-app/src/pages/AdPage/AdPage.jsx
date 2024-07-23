@@ -42,13 +42,13 @@ const AdPage = () => {
               }
             );
           }}
-          className="mr-2 bg-red-500 text-white px-2 py-1 rounded"
+          className="mr-2 bg-red-500 text-white px-2 p-2 text-sm rounded"
         >
           بله
         </button>
         <button
           onClick={() => toast.dismiss(t.id)}
-          className="mr-2 bg-gray-500 text-white px-2 py-1 rounded"
+          className="mr-2 bg-gray-500 text-white px-2 p-2 text-sm rounded"
         >
           خیر
         </button>
