@@ -93,7 +93,7 @@ const AdForm = ({ ad, onSave }) => {
             value={coordinates}
             onChange={handleCoordinatesChange}
             required
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full text-white p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
             type="submit"
