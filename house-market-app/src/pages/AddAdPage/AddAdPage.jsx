@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import AdForm from "../../components/AdForm/AdForm";
+import { useAuth } from "../../contexts/AuthContext";
 import toast from "react-hot-toast";
 
 const AddAdPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [ad, setAd] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const { request, loading, error } = useFetch();
-
   useEffect(() => {
     if (id) {
       setIsEditing(true);
@@ -30,7 +31,9 @@ const AddAdPage = () => {
       ? `http://localhost:3001/ads/${id}`
       : "http://localhost:3001/ads";
     const method = isEditing ? "PUT" : "POST";
-    console.log(url, method, adData);
+
+    console.log("Saving Ad Data:", adData);
+
     request(
       { url, method, data: adData },
       () => {
@@ -45,6 +48,7 @@ const AddAdPage = () => {
       }
     );
   };
+
   if (loading) {
     return (
       <p className="text-center text-gray-700 dark:text-gray-300">
@@ -62,7 +66,7 @@ const AddAdPage = () => {
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-right">
         {isEditing ? "ویرایش آگهی" : "ثبت آگهی جدید"}
       </h1>
-      <AdForm ad={ad} onSave={handleSave} />
+      <AdForm ad={ad} onSave={handleSave} userId={user.user.id} />
     </div>
   );
 };

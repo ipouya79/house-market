@@ -66,7 +66,7 @@ const AdPage = () => {
   return ad ? (
     <div className="max-w-3xl mt-2 mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
       {isEditing ? (
-        <AdForm ad={ad} onSave={handleSave} />
+        <AdForm ad={ad} onSave={handleSave} userId={user.user.id} />
       ) : (
         <div className="text-right ">
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">

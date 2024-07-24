@@ -38,7 +38,7 @@ const HomePage = () => {
   }
   return (
     <div className="relative min-h-screen">
-      <AdList ads={currentAds} />
+      <AdList ads={currentAds.reverse()} />
       {showPagination && (
         <div>
           {/* Pagination for large screens */}

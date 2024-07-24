@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MapPicker from "../Map/MapPicker";
 import "leaflet/dist/leaflet.css";
 
-const AdForm = ({ ad, onSave }) => {
+const AdForm = ({ ad, onSave, userId }) => {
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
@@ -27,6 +27,7 @@ const AdForm = ({ ad, onSave }) => {
     e.preventDefault();
 
     const adData = {
+      userId,
       title,
       address,
       description,
@@ -35,6 +36,8 @@ const AdForm = ({ ad, onSave }) => {
       lng: location.lng,
       date: new Date().toISOString(),
     };
+
+    console.log("Ad Data:", adData);
 
     onSave(adData);
   };
@@ -64,7 +67,6 @@ const AdForm = ({ ad, onSave }) => {
             className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <textarea
-            type="text"
             placeholder="آدرس"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
