@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MapPicker from "../Map/MapPicker";
+
 const AdForm = ({ ad, onSave, userId }) => {
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
@@ -21,7 +22,6 @@ const AdForm = ({ ad, onSave, userId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const adData = {
       userId,
       title,
@@ -32,20 +32,7 @@ const AdForm = ({ ad, onSave, userId }) => {
       lng: location.lng,
       date: new Date().toISOString(),
     };
-
     onSave(adData);
-  };
-
-  const handleCoordinatesChange = (e) => {
-    const value = e.target.value;
-    setCoordinates(value);
-    const [lat, lng] = value.split(",").map(Number);
-    if (!isNaN(lat) && !isNaN(lng)) {
-      setLocation({
-        lat: parseFloat(lat.toFixed(3)),
-        lng: parseFloat(lng.toFixed(3)),
-      });
-    }
   };
 
   return (
@@ -68,7 +55,7 @@ const AdForm = ({ ad, onSave, userId }) => {
             required
             className="h-20 w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
           />
-          <input
+          <textarea
             placeholder="توضیحات تکمیلی"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -88,15 +75,13 @@ const AdForm = ({ ad, onSave, userId }) => {
             type="text"
             placeholder="مختصات (عرض جغرافیایی, طول جغرافیایی)"
             value={coordinates}
-            onChange={handleCoordinatesChange}
-            required
-            className="w-full text-white p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
             type="submit"
-            className="w-full py-3 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
           >
-            {ad ? "ویرایش " : "افزودن"}
+            ثبت
           </button>
         </form>
       </div>
@@ -104,16 +89,14 @@ const AdForm = ({ ad, onSave, userId }) => {
         <MapPicker
           location={location}
           setLat={(lat) => {
-            const roundedLat = parseFloat(lat.toFixed(3));
-            setLocation((prev) => ({ ...prev, lat: roundedLat }));
-            setCoordinates(`${roundedLat}, ${location.lng.toFixed(3)}`);
+            setLocation((loc) => ({ ...loc, lat }));
+            setCoordinates(`${lat.toFixed(3)}, ${location.lng.toFixed(3)}`);
           }}
           setLng={(lng) => {
-            const roundedLng = parseFloat(lng.toFixed(3));
-            setLocation((prev) => ({ ...prev, lng: roundedLng }));
-            setCoordinates(`${location.lat.toFixed(3)}, ${roundedLng}`);
+            setLocation((loc) => ({ ...loc, lng }));
+            setCoordinates(`${location.lat.toFixed(3)}, ${lng.toFixed(3)}`);
           }}
-          setAddress={(address) => setAddress(address)}
+          setAddress={setAddress}
         />
       </div>
     </div>

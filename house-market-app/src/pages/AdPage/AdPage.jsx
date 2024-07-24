@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import AdForm from "../../components/AdForm/AdForm";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { useAuth } from "../../contexts/AuthContext";
 import toast from "react-hot-toast";
+import MapPicker from "../../components/Map/MapPicker";
 
 const AdPage = () => {
   const { id } = useParams();
@@ -15,12 +15,39 @@ const AdPage = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    request(
-      { url: `http://localhost:3001/ads/${id}`, method: "GET" },
-      (data) => setAd(data),
-      (err) => console.error(err)
-    );
+    if (id) {
+      request(
+        { url: `http://localhost:3001/ads/${id}`, method: "GET" },
+        (data) => setAd(data),
+        (err) => console.error(err)
+      );
+    }
   }, [id, request]);
+
+  const handleSave = (adData) => {
+    const url = isEditing
+      ? `http://localhost:3001/ads/${id}`
+      : "http://localhost:3001/ads";
+    const method = isEditing ? "PUT" : "POST";
+
+    request(
+      {
+        url,
+        method,
+        data: { ...adData },
+      },
+      () => {
+        toast.success(
+          isEditing ? "آگهی با موفقیت ویرایش شد" : "آگهی با موفقیت ثبت شد"
+        );
+        navigate("/");
+      },
+      (err) => {
+        console.error("Error saving ad:", err);
+        toast.error("خطا! لطفا دوباره تلاش کنید");
+      }
+    );
+  };
 
   const handleDelete = () => {
     toast((t) => (
@@ -55,17 +82,24 @@ const AdPage = () => {
     ));
   };
 
-  const handleSave = (updatedAd) => {
-    setAd(updatedAd);
-    setIsEditing(false);
-  };
-
   const canEditOrDelete = user && ad && user.user.id === ad.userId;
+
+  if (loading) {
+    return (
+      <p className="text-center text-gray-700 dark:text-gray-300">
+        درحال بارگیری ...
+      </p>
+    );
+  }
+
+  if (error) {
+    return <p className="text-center text-red-500">خطا: {error}</p>;
+  }
 
   return ad ? (
     <div className="max-w-3xl mt-2 mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
       {isEditing ? (
-        <AdForm ad={ad} onSave={handleSave} userId={user.id} />
+        <AdForm ad={ad} onSave={handleSave} userId={user.user.id} />
       ) : (
         <div className="text-right ">
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
@@ -78,37 +112,39 @@ const AdPage = () => {
             شماره تماس: {ad.phone}
           </p>
           <div className="mb-6">
-            <MapContainer
-              center={[ad.lat, ad.lng]}
-              zoom={13}
-              style={{ height: "300px", width: "100%" }}
-              className="rounded-lg shadow-md"
-            >
-              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-              <Marker position={[ad.lat, ad.lng]} />
-            </MapContainer>
+            <MapPicker
+              location={{ lat: ad.lat, lng: ad.lng }}
+              setLat={() => {}}
+              setLng={() => {}}
+              setAddress={() => {}}
+            />
           </div>
           {canEditOrDelete && (
-           <div className="flex flex-row-reverse gap-2 space-x-4">
-           <button
-             onClick={() => setIsEditing(true)}
-             className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-           >
-             ویرایش
-           </button>
-           <button
-             onClick={handleDelete}
-             className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-           >
-             حذف
-           </button>
-         </div>
+            <div className="flex flex-row-reverse gap-2 space-x-4">
+              <button
+                onClick={() => setIsEditing(true)}
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                ویرایش
+              </button>
+              <button
+                onClick={handleDelete}
+                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+              >
+                حذف
+              </button>
+            </div>
           )}
         </div>
       )}
     </div>
   ) : (
-    <p>Loading...</p>
+    <div className="max-w-4xl mt-8 mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-right">
+        ثبت آگهی جدید
+      </h1>
+      <AdForm onSave={handleSave} userId={user.user.id} />
+    </div>
   );
 };
 

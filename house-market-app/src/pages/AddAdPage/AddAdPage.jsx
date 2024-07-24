@@ -33,9 +33,14 @@ const AddAdPage = () => {
     const method = isEditing ? "PUT" : "POST";
 
     console.log("Saving Ad Data:", adData);
+    console.log(id);
 
     request(
-      { url, method, data: adData },
+      {
+        url,
+        method,
+        data: { ...adData },
+      },
       () => {
         toast.success(
           isEditing ? "آگهی با موفقیت ویرایش شد" : "آگهی با موفقیت ثبت شد"
