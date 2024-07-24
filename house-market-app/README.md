@@ -1,70 +1,83 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# House Market App
 
-## Available Scripts
+Welcome to the House Market App! This React application is designed to display a market for houses with interactive features such as mapping, routing, and notifications. The app uses Create React App as its base, along with a variety of libraries and tools for functionality and styling.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Interactive Maps**: Utilizes Leaflet and React-Leaflet for map features.
+- **Routing**: Implemented with React Router DOM for page navigation.
+- **Toast Notifications**: Enabled via React Hot Toast.
+- **REST API Integration**: Managed with Axios.
+- **Mock Data**: Provided by JSON Server and JSON Server Auth.
+- **Styling**: Powered by Tailwind CSS for modern, responsive design.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Follow these instructions to set up and run the project locally.
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Make sure you have the following installed:
+- [Node.js](https://nodejs.org/) (version 14 or higher)
+- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the Repository**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   git clone https://github.com/ipouya79/house-market-app.git
+   cd house-market-app
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Install Dependencies**
 
-### `npm run eject`
+   Using npm:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ```bash
+   npm install
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Running the Application
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To start the development server and view the application in your browser:
 
-## Learn More
+```bash
+node server.js
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+The app will be available at [http://localhost:3000](http://localhost:3000).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Tailwind CSS
 
-### Making a Progressive Web App
+Tailwind CSS is used for styling. You can modify its configuration in the `tailwind.config.js` file to suit your needs.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### JSON Server
 
-### Advanced Configuration
+A mock API server is set up using JSON Server and JSON Server Auth. This configuration is useful for simulating server responses and authentication.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Dependencies
 
-### Deployment
+The project relies on the following dependencies:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- **React**: Core library for building the user interface.
+- **React Router DOM**: For client-side routing.
+- **Leaflet**: Interactive mapping library.
+- **React-Leaflet**: React components for Leaflet integration.
+- **Axios**: Promise-based HTTP client for making requests.
+- **React Hot Toast**: For user notifications.
+- **Tailwind CSS**: Utility-first CSS framework.
+- **JSON Server**: Simple mock API server.
+- **JSON Server Auth**: Authentication support for JSON Server.
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+---
