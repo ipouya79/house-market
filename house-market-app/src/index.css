@@ -8,6 +8,16 @@
   font-family: "BYekan";
   src: url("./Fonts/BYekan.ttf");
 }
+body.light {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+body.dark {
+  background-color: #181818;
+  color: #f0f0f0;
+}
+
 body {
   font-family: "BYekan";
 }

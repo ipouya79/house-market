@@ -21,7 +21,7 @@ const App = () => {
     <Router>
       <Toaster />
       <Navbar />
-      <div className={`container ${theme}`}>
+      <div className={` ${theme} w-full`}>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />

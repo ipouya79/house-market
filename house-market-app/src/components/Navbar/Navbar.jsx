@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useTheme } from "../../contexts/ThemeContext";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -11,7 +12,7 @@ const Navbar = () => {
     <nav className="navbar bg-white dark:bg-gray-800 p-4 shadow-md">
       <div className="container mx-auto flex flex-row-reverse justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          بامامسکن
+          <Link to={"/"}> بامامسکن</Link>
         </h1>
         <div className="flex items-center space-x-4">
           <button

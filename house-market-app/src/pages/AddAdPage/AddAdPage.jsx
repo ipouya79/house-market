@@ -12,15 +12,13 @@ const AddAdPage = () => {
   const [ad, setAd] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const { request, loading, error } = useFetch();
+
   useEffect(() => {
     if (id) {
       setIsEditing(true);
       request(
         { url: `http://localhost:3001/ads/${id}`, method: "GET" },
-        (data) => {
-          console.log("Fetched Ad Data:", data);
-          setAd(data);
-        },
+        (data) => setAd(data),
         (err) => console.error("Error fetching ad:", err)
       );
     }
@@ -32,15 +30,8 @@ const AddAdPage = () => {
       : "http://localhost:3001/ads";
     const method = isEditing ? "PUT" : "POST";
 
-    console.log("Saving Ad Data:", adData);
-    console.log(id);
-
     request(
-      {
-        url,
-        method,
-        data: { ...adData },
-      },
+      { url, method, data: { ...adData } },
       () => {
         toast.success(
           isEditing ? "آگهی با موفقیت ویرایش شد" : "آگهی با موفقیت ثبت شد"
@@ -67,8 +58,8 @@ const AddAdPage = () => {
   }
 
   return (
-    <div className="max-w-4xl mt-8 mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-right">
+    <div className="max-w-4xl mt-8 mx-auto p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg rtl">
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-right">
         {isEditing ? "ویرایش آگهی" : "ثبت آگهی جدید"}
       </h1>
       <AdForm ad={ad} onSave={handleSave} userId={user.user.id} />

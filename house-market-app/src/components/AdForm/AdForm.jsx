@@ -36,31 +36,30 @@ const AdForm = ({ ad, onSave, userId }) => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row-reverse w-full gap-4">
+    <div className="flex flex-col lg:flex-row-reverse w-full gap-6 lg:gap-8">
       <div className="w-full lg:w-1/2">
-        <form onSubmit={handleSubmit} className="space-y-4 text-right">
+        <form onSubmit={handleSubmit} className="space-y-2 text-right">
           <input
             type="text"
             placeholder="عنوان"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition ease-in-out duration-300 dark:text-black"
           />
           <textarea
-            type="text"
             placeholder="آدرس"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
-            className="h-20 w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className="h-20 block w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition ease-in-out duration-300 resize-none  dark:text-black"
           />
-          <textarea
+          <input
             placeholder="توضیحات تکمیلی"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className="w-full  p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition ease-in-out duration-300 resize-none  dark:text-black"
           />
           <input
             type="tel"
@@ -68,24 +67,24 @@ const AdForm = ({ ad, onSave, userId }) => {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             required
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition ease-in-out duration-300  dark:text-black"
           />
           <input
             disabled
             type="text"
             placeholder="مختصات (عرض جغرافیایی, طول جغرافیایی)"
             value={coordinates}
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none"
           />
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition ease-in-out duration-300  dark:text-black"
           >
             ثبت
           </button>
         </form>
       </div>
-      <div className="w-full lg:w-1/2">
+      <div className="w-full h-full lg:w-1/2 ">
         <MapPicker
           location={location}
           setLat={(lat) => {

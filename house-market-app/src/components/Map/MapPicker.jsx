@@ -57,6 +57,7 @@ const MapPicker = ({ location, setLat, setLng, setAddress }) => {
       center={location ? [location.lat, location.lng] : [35.7219, 51.3347]}
       zoom={10}
       style={{ height: "400px", width: "100%" }}
+      className="rounded-lg shadow-lg "
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

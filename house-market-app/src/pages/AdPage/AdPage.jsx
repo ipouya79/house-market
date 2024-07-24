@@ -31,11 +31,7 @@ const AdPage = () => {
     const method = isEditing ? "PUT" : "POST";
 
     request(
-      {
-        url,
-        method,
-        data: { ...adData },
-      },
+      { url, method, data: { ...adData } },
       () => {
         toast.success(
           isEditing ? "آگهی با موفقیت ویرایش شد" : "آگهی با موفقیت ثبت شد"
@@ -51,8 +47,8 @@ const AdPage = () => {
 
   const handleDelete = () => {
     toast((t) => (
-      <div className="flex flex-row-reverse justify-around items-center ">
-        <p> آیا از حذف این آگهی مطمئن هستید؟</p>
+      <div className="flex flex-row-reverse justify-around items-center rtl">
+        <p>آیا از حذف این آگهی مطمئن هستید؟</p>
         <button
           onClick={() => {
             toast.dismiss(t.id);
@@ -68,13 +64,13 @@ const AdPage = () => {
               }
             );
           }}
-          className="mr-2 bg-red-500 text-white px-2 p-2 text-sm rounded"
+          className="bg-red-600 text-white px-4 py-2 text-sm rounded-lg hover:bg-red-700 rtl"
         >
           بله
         </button>
         <button
           onClick={() => toast.dismiss(t.id)}
-          className="mr-2 bg-gray-500 text-white px-2 p-2 text-sm rounded"
+          className="bg-gray-600 text-white px-4 py-2 text-sm rounded-lg hover:bg-gray-700 rtl"
         >
           خیر
         </button>
@@ -85,11 +81,7 @@ const AdPage = () => {
   const canEditOrDelete = user && ad && user.user.id === ad.userId;
 
   if (loading) {
-    return (
-      <p className="text-center text-gray-700 dark:text-gray-300">
-        درحال بارگیری ...
-      </p>
-    );
+    return <p className="text-center text-gray-700 dark:text-gray-300">درحال بارگیری ...</p>;
   }
 
   if (error) {
@@ -97,21 +89,21 @@ const AdPage = () => {
   }
 
   return ad ? (
-    <div className="max-w-3xl mt-2 mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+    <div className="max-w-4xl mt-8 mx-auto p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg rtl">
       {isEditing ? (
         <AdForm ad={ad} onSave={handleSave} userId={user.user.id} />
       ) : (
-        <div className="text-right ">
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3 text-right rtl">
             {ad.address}
           </h1>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
+          <p className="text-gray-700 dark:text-gray-300 mb-3 text-right rtl">
             {ad.description}
           </p>
-          <p className="text-gray-700 dark:text-gray-300 mb-6">
+          <p className="text-gray-700 dark:text-gray-300 mb-3 text-right rtl">
             شماره تماس: {ad.phone}
           </p>
-          <div className="mb-6">
+          <div className="mb-3">
             <MapPicker
               location={{ lat: ad.lat, lng: ad.lng }}
               setLat={() => {}}
@@ -120,16 +112,16 @@ const AdPage = () => {
             />
           </div>
           {canEditOrDelete && (
-            <div className="flex flex-row-reverse gap-2 space-x-4">
+            <div className="flex flex-row-reverse gap-2 rtl ">
               <button
                 onClick={() => setIsEditing(true)}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 rtl"
               >
                 ویرایش
               </button>
               <button
                 onClick={handleDelete}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 rtl"
               >
                 حذف
               </button>
@@ -139,7 +131,7 @@ const AdPage = () => {
       )}
     </div>
   ) : (
-    <div className="max-w-4xl mt-8 mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+    <div className="max-w-4xl mt-8 mx-auto p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg rtl">
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-right">
         ثبت آگهی جدید
       </h1>
