@@ -47,8 +47,8 @@ const AdPage = () => {
 
   const handleDelete = () => {
     toast((t) => (
-      <div className="flex flex-row-reverse justify-around items-center rtl">
-        <p>آیا از حذف این آگهی مطمئن هستید؟</p>
+      <div className="flex flex-row-reverse justify-around items-center ">
+        <p className="text-sm">آیا از حذف این آگهی مطمئن هستید؟</p>
         <button
           onClick={() => {
             toast.dismiss(t.id);
@@ -64,13 +64,13 @@ const AdPage = () => {
               }
             );
           }}
-          className="bg-red-600 text-white px-4 py-2 text-sm rounded-lg hover:bg-red-700 rtl"
+          className="bg-red-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-red-700 rtl mr-2"
         >
           بله
         </button>
         <button
           onClick={() => toast.dismiss(t.id)}
-          className="bg-gray-600 text-white px-4 py-2 text-sm rounded-lg hover:bg-gray-700 rtl"
+          className="bg-gray-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-gray-700 rtl mr-1"
         >
           خیر
         </button>

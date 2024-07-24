@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -16,24 +16,21 @@ const setDefaultIcon = () => {
 };
 
 const LocationPicker = ({ setLat, setLng, setAddress, location }) => {
-  const fetchAddress = useCallback(
-    async (lat, lng) => {
-      try {
-        const response = await fetch(
-          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1`,
-          {
-            headers: { "Accept-Language": "fa" }, // request Persian address
-          }
-        );
-        const data = await response.json();
-        setAddress(data.display_name || "آدرس یافت نشد");
-      } catch (error) {
-        console.error("Error fetching address:", error);
-        setAddress("خطا در دریافت آدرس");
-      }
-    },
-    [setAddress]
-  );
+  const fetchAddress = async (lat, lng) => {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1`,
+        {
+          headers: { "Accept-Language": "fa" }, // Request Persian address
+        }
+      );
+      const data = await response.json();
+      setAddress(data.display_name || "آدرس یافت نشد");
+    } catch (error) {
+      console.error("Error fetching address:", error);
+      setAddress("خطا در دریافت آدرس");
+    }
+  };
 
   useMapEvents({
     click(e) {
@@ -44,7 +41,7 @@ const LocationPicker = ({ setLat, setLng, setAddress, location }) => {
     },
   });
 
-  return location && <Marker position={[location.lat, location.lng]} />;
+  return location ? <Marker position={[location.lat, location.lng]} /> : null;
 };
 
 const MapPicker = ({ location, setLat, setLng, setAddress }) => {
@@ -57,7 +54,7 @@ const MapPicker = ({ location, setLat, setLng, setAddress }) => {
       center={location ? [location.lat, location.lng] : [35.7219, 51.3347]}
       zoom={10}
       style={{ height: "400px", width: "100%" }}
-      className="rounded-lg shadow-lg "
+      className="rounded-lg shadow-lg"
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

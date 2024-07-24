@@ -2,11 +2,17 @@ import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useTheme } from "../../contexts/ThemeContext";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/");
+    logout();
+  };
 
   return (
     <nav className="navbar bg-white dark:bg-gray-800 p-4 shadow-md">
@@ -40,7 +46,7 @@ const Navbar = () => {
                 </a>
                 <button
                   className="text-red-500 dark:text-red-300 hover:underline"
-                  onClick={logout}
+                  onClick={handleLogout}
                 >
                   خروج
                 </button>
