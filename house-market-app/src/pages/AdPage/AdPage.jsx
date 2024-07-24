@@ -5,7 +5,6 @@ import AdForm from "../../components/AdForm/AdForm";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { useAuth } from "../../contexts/AuthContext";
 import toast from "react-hot-toast";
-import "leaflet/dist/leaflet.css";
 
 const AdPage = () => {
   const { id } = useParams();
@@ -61,12 +60,12 @@ const AdPage = () => {
     setIsEditing(false);
   };
 
-  const canEditOrDelete = user && ad && user.id === ad.userId;
+  const canEditOrDelete = user && ad && user.user.id === ad.userId;
 
   return ad ? (
     <div className="max-w-3xl mt-2 mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
       {isEditing ? (
-        <AdForm ad={ad} onSave={handleSave} userId={user.user.id} />
+        <AdForm ad={ad} onSave={handleSave} userId={user.id} />
       ) : (
         <div className="text-right ">
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
@@ -90,30 +89,26 @@ const AdPage = () => {
             </MapContainer>
           </div>
           {canEditOrDelete && (
-            <div className="flex flex-row-reverse gap-2 space-x-4">
-              <button
-                onClick={() => setIsEditing(true)}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-              >
-                ویرایش
-              </button>
-              <button
-                onClick={handleDelete}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-              >
-                حذف
-              </button>
-            </div>
+           <div className="flex flex-row-reverse gap-2 space-x-4">
+           <button
+             onClick={() => setIsEditing(true)}
+             className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+           >
+             ویرایش
+           </button>
+           <button
+             onClick={handleDelete}
+             className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+           >
+             حذف
+           </button>
+         </div>
           )}
         </div>
       )}
-      {loading && <p>درحال بارگیری ...</p>}
-      {error && <p className="error-message">{error}</p>}
     </div>
   ) : (
-    <p className="text-center text-gray-700 dark:text-gray-300">
-      درحال بارگیری ...
-    </p>
+    <p>Loading...</p>
   );
 };
 

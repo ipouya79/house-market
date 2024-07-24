@@ -1,17 +1,49 @@
 {
   "users": [
     {
-      "email": "admin@gmail.com",
-      "password": "$2a$10$sGpShRG3ZpxoYbzVSo.Nf.UMOR63Yu484rFnFmqZIELSwGFl7iaXa",
-      "id": 1
-    },
-    {
       "email": "pouya@gmail.com",
       "password": "$2a$10$s4rOpJI2e.8K6g0HYOYMQuvX.EJufNTbgM6Ku2c7jKJNVkE4TOtOO",
       "id": 2
+    },
+    {
+      "email": "admin@gmail.com",
+      "password": "$2a$10$ryL0zAq4w/ZA002J0Va.C.8gkTiTCdbMK8Q9zgYFTzOjZWBXTZ2CS",
+      "id": 3
     }
   ],
   "ads": [
-   
+    {
+      "userId": 2,
+      "title": "زمین تجاری",
+      "address": "یاس, گیشا, کوی نصر, منطقه ۲ شهر تهران, شهر تهران, بخش مرکزی شهرستان تهران, شهرستان تهران, استان تهران, 14399-55471, ایران",
+      "description": "زمین تجاری در گیشا",
+      "phone": "09396861766",
+      "lat": 35.738,
+      "lng": 51.382,
+      "date": "2024-07-24T09:54:36.645Z",
+      "id": 1
+    },
+    {
+      "userId": 2,
+      "title": "احمدی, گلدسته",
+      "address": "احمدی, گلدسته, شمس آباد, دهستان فیروزبهرام, بخش چهاردانگه, شهرستان اسلامشهر, استان تهران, 13778-78888, ایران",
+      "description": "احمدی, گلدسته",
+      "phone": "09396861766",
+      "lat": 35.614,
+      "lng": 51.272,
+      "date": "2024-07-24T09:55:14.672Z",
+      "id": 2
+    },
+    {
+      "userId": 3,
+      "title": "اسلامشهر",
+      "address": "اسلامشهر, سلمان فارسی, شهرک لاله, اسلامشهر, بخش مرکزی اسلامشهر, شهرستان اسلامشهر, استان تهران, 33169-49516, ایران",
+      "description": "اسلامشهر",
+      "phone": "09396861766",
+      "lat": 35.555,
+      "lng": 51.214,
+      "date": "2024-07-24T10:01:52.708Z",
+      "id": 3
+    }
   ]
 }

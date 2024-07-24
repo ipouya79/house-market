@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import MapPicker from "../Map/MapPicker";
-import "leaflet/dist/leaflet.css";
-
 const AdForm = ({ ad, onSave, userId }) => {
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
@@ -16,10 +14,8 @@ const AdForm = ({ ad, onSave, userId }) => {
       setAddress(ad.address || "");
       setDescription(ad.description || "");
       setPhone(ad.phone || "");
-      const lat = ad.lat || 35.6892;
-      const lng = ad.lng || 51.389;
-      setLocation({ lat, lng });
-      setCoordinates(`${lat.toFixed(3)}, ${lng.toFixed(3)}`);
+      setLocation({ lat: ad.lat || 35.6892, lng: ad.lng || 51.389 });
+      setCoordinates(`${ad.lat.toFixed(3)}, ${ad.lng.toFixed(3)}`);
     }
   }, [ad]);
 
@@ -36,8 +32,6 @@ const AdForm = ({ ad, onSave, userId }) => {
       lng: location.lng,
       date: new Date().toISOString(),
     };
-
-    console.log("Ad Data:", adData);
 
     onSave(adData);
   };
@@ -67,6 +61,7 @@ const AdForm = ({ ad, onSave, userId }) => {
             className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <textarea
+            type="text"
             placeholder="آدرس"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
